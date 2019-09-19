@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Lautaro Alvarez",
+      "authorEmail": "lautaro@grava.digital",
+      "authorUrl": ""
+    }
+  }
+}
