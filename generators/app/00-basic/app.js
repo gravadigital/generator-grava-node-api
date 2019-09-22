@@ -7,8 +7,7 @@ const bodyParser = require('body-parser');
 const routes = require('./lib/routes');
 const expressWinston = require('express-winston');
 const app = express();
-const cors = require('cors');
-//**//APP-REQUIRES//**//
+const cors = require('cors');<%=appRequires%>
 
 function connectMongoose() {
     const mongoose = require('mongoose');
@@ -32,7 +31,7 @@ function initialize() {
 
     Object.keys(routes).forEach((key) => {
         app.use(`/api/${key}`, routes[key]);
-    });
+    });<%-appAfterInitialize%>
 
     app.use(function(req, res, next) {
         let err = new Error('Not Found');

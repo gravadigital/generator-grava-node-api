@@ -1,5 +1,4 @@
-'use strict';
-//**//MODELS-INDEX-REQUIRES//**//
+'use strict';<%-modelsIndexRequires%>
 
-module.exports = {//**//MODELS-INDEX-EXPORTS//**//
+module.exports = {<%-modelsIndexExports%>
 };

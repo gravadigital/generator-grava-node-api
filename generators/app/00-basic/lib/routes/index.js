@@ -1,5 +1,4 @@
-'use strict';
-//**//ROUTES-INDEX-REQUIRES//**//
+'use strict';<%-routesIndexRequires%>
 
-module.exports = {//**//ROUTES-INDEX-EXPORTS//**//
+module.exports = {<%-routesIndexExports%>
 };
