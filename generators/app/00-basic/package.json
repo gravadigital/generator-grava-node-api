@@ -13,7 +13,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6-alpha.3",
     "express-winston": "^3.3.0",
-    "helmet": "^3.21.0",
+    "helmet": "^3.21.1",
     "module-alias": "^2.2.1",
     "mongoose": "^5.7.1",
     "winston": "^3.2.1"//**//PACKAGEJSON-DEPENDENCES//**//

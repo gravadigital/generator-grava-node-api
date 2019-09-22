@@ -2,6 +2,7 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const replace = require('replace-in-file');
 
 module.exports = class extends Generator {
   prompting() {
@@ -30,9 +31,15 @@ module.exports = class extends Generator {
         appName: this.props.appName
       }
     );
+    replace.sync({
+      files: `${this.destinationPath()}/**/*`,
+      from: new RegExp('[\/]{2}[*]{2}[\/]{2}.*[\/]{2}[*]{2}[\/]{2}', 'img'),
+      to: ''
+    });
   }
 
-  // install() {
-  //   this.installDependencies();
-  // }
+  install() {
+    this.log('Installing dependencies');
+    this.npmInstall();
+  }
 };

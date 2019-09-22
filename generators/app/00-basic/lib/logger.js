@@ -4,7 +4,7 @@ let logger;
 
 const myFormat = format.printf(({level, message, timestamp}) => {
     let toLog = message;
-    if (message.constructor === Object) {
+    if (message && message.constructor === Object) {
         toLog = JSON.stringify(message, null, 4);
     }
     return `${timestamp} ${level}: ${toLog}`;
@@ -62,29 +62,29 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-const originalInfo = logger.info;
-const originalDebug = logger.debug;
-const originalError = logger.error;
+logger._info = logger.info;
+logger._debug = logger.debug;
+logger._error = logger.error;
 
 logger.info = function(data1, data2) {
     if (data2) {
         data1 += ` ${JSON.stringify(data2, null, 2)}`;
     }
-    return originalInfo(data1);
+    return logger._info(data1);
 };
 
 logger.debug = function(data1, data2) {
     if (data2) {
         data1 += ` ${JSON.stringify(data2, null, 2)}`;
     }
-    return originalDebug(data1);
+    return logger._debug(data1);
 };
 
 logger.error = function(data1, data2) {
     if (data2) {
         data1 += ` ${JSON.stringify(data2, null, 2)}`;
     }
-    return originalError(data1);
+    return logger._error(data1);
 };
 
 module.exports = logger;
