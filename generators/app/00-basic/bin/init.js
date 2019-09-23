@@ -10,6 +10,7 @@ return app.connectMongoose()
         logger.info(`Your server is listening on port ${process.env.SERVER_PORT}`);<%-initPostScripts%>
     })
     .catch((error) => {
-        logger.error('APP STOPPED', error);
+        logger.error('APP STOPPED');
+        logger.error(error.stack);
         return process.exit(1);
     });
