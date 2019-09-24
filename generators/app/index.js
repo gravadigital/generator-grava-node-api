@@ -17,6 +17,10 @@ module.exports = class extends Generator {
       type: 'confirm',
       name: 'withHiroki',
       message: 'Want Hiroki?'
+    }, {
+      type: 'confirm',
+      name: 'withSchedule',
+      message: 'Want schedule utils?'
     }];
 
     return this.prompt(prompts).then((props) => {
@@ -41,6 +45,7 @@ module.exports = class extends Generator {
       decoratorsIndexRequires: '',
       decoratorsIndexExports: ''
     };
+
     // WITH HIROKI
     if (this.props.withHiroki) {
       this.sourceRoot(this.sourceRoot() + '/../01-hiroki');
@@ -56,6 +61,24 @@ module.exports = class extends Generator {
     app.use(buildHiroki());`;
       vars.packagejsonDependences += `,
       "hiroki": "^0.2.6"`;
+    }
+
+    // WITH SCHEDULE UTILS
+    if (this.props.withSchedule) {
+      this.sourceRoot(this.sourceRoot() + '/../02-schedule');
+      this.fs.copyTpl(
+        this.templatePath('.'),
+        this.destinationPath('.'),
+        vars,
+        {},
+        {globOptions: {dot: true}}
+      );
+      vars.initRequires += `
+    const scheduleRunner = require('../lib/utils/schedule-runner');`;
+      vars.initPostScripts += `
+    scheduleRunner();`;
+      vars.packagejsonDependences += `,
+      "node-schedule": "^1.3.2"`;
     }
 
     // BASIC STRUCTURE
