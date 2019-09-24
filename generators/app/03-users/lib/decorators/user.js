@@ -9,7 +9,7 @@ function decorator(controller) {
     });
 
     controller.request('get', (req, res, next) => {
-        if (req.user.role !== 'admin') {
+        if (req.decodedToken.role !== 'admin') {
             return res.status(401).json({
                 code: 'unauthorized',
                 message: 'Unauthorized'

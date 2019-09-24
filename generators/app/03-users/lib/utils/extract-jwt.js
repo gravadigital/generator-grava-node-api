@@ -16,10 +16,11 @@ function extractJwt(req, res, next) {
     jwt.verify(getJwt(req), JWT_SECRET, (err, decoded) => {
         if (err) {
             return res.status(401).json({
-                msg: 'unauthorized'
+                code: 'unauthorized',
+                message: 'Unauthorized'
             });
         }
-        req.user = decoded;
+        req.decodedToken = decoded;
         return next();
     });
 }
