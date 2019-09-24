@@ -21,6 +21,10 @@ module.exports = class extends Generator {
       type: 'confirm',
       name: 'withSchedule',
       message: 'Want schedule utils?'
+    }, {
+      type: 'confirm',
+      name: 'withUsers',
+      message: 'Want users and auth?'
     }];
 
     return this.prompt(prompts).then((props) => {
@@ -32,7 +36,8 @@ module.exports = class extends Generator {
     this.destinationRoot(this.props.appName);
     const vars = {
       appName: this.props.appName,
-      appAfterInitialize: '',
+      appAfterInitializePrevRoutes: '',
+      appAfterInitializeRoutes: '',
       appRequires: '',
       envDist: '',
       packagejsonDependences: '',
@@ -45,23 +50,6 @@ module.exports = class extends Generator {
       decoratorsIndexRequires: '',
       decoratorsIndexExports: ''
     };
-
-    // WITH HIROKI
-    if (this.props.withHiroki) {
-      this.sourceRoot(this.sourceRoot() + '/../01-hiroki');
-      this.fs.copyTpl(
-        this.templatePath('.'),
-        this.destinationPath('.'),
-        vars,
-        {},
-        {globOptions: {dot: true}}
-      );
-      vars.appAfterInitialize += `
-    const buildHiroki = require('./build-hiroki');
-    app.use(buildHiroki());`;
-      vars.packagejsonDependences += `,
-      "hiroki": "^0.2.6"`;
-    }
 
     // WITH SCHEDULE UTILS
     if (this.props.withSchedule) {
@@ -78,7 +66,61 @@ module.exports = class extends Generator {
       vars.initPostScripts += `
     scheduleRunner();`;
       vars.packagejsonDependences += `,
-      "node-schedule": "^1.3.2"`;
+    "node-schedule": "^1.3.2"`;
+    }
+
+    // WITH USER STRUCTURE
+    if (this.props.withUsers) {
+      this.sourceRoot(this.sourceRoot() + '/../03-users');
+      this.fs.copyTpl(
+        this.templatePath('.'),
+        this.destinationPath('.'),
+        vars,
+        {},
+        {globOptions: {dot: true}}
+      );
+      vars.modelsIndexRequires += `
+const User = require('./user');`;
+      vars.modelsIndexExports += `
+    User`;
+      vars.decoratorsIndexRequires += `
+const User = require('./user');`;
+      vars.decoratorsIndexExports += `
+    User`;
+      vars.packagejsonDependences += `,
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1"`;
+      vars.envDist += `
+JWT_SECRET=`;
+      vars.routesIndexRequires += `
+const Auth = require('./auth')`;
+      vars.routesIndexExports += `
+    Auth`;
+      vars.appRequires += `
+const publicPaths = require('./config/public-paths');
+const extractJwt = require('./lib/utils/extract-jwt');`;
+      vars.appAfterInitializePrevRoutes += `
+    app.get(publicPaths.regex('get'), extractJwt);
+    app.put(publicPaths.regex('put'), extractJwt);
+    app.post(publicPaths.regex('post'), extractJwt);
+    app.delete(publicPaths.regex('delete'), extractJwt);`;
+    }
+
+    // WITH HIROKI
+    if (this.props.withHiroki) {
+      this.sourceRoot(this.sourceRoot() + '/../01-hiroki');
+      this.fs.copyTpl(
+        this.templatePath('.'),
+        this.destinationPath('.'),
+        vars,
+        {},
+        {globOptions: {dot: true}}
+      );
+      vars.appAfterInitializeRoutes += `
+    const buildHiroki = require('./build-hiroki');
+    app.use(buildHiroki());`;
+      vars.packagejsonDependences += `,
+      "hiroki": "^0.2.6"`;
     }
 
     // BASIC STRUCTURE

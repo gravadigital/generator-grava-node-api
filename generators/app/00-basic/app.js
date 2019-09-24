@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const routes = require('./lib/routes');
 const expressWinston = require('express-winston');
 const app = express();
-const cors = require('cors');<%=appRequires%>
+const cors = require('cors');<%-appRequires%>
 
 function connectMongoose() {
     const mongoose = require('mongoose');
@@ -28,10 +28,10 @@ function initialize() {
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(cookieParser());
     app.use(express.static(path.join(__dirname, 'public')));
-
+<%-appAfterInitializePrevRoutes%>
     Object.keys(routes).forEach((key) => {
         app.use(`/api/${key}`, routes[key]);
-    });<%-appAfterInitialize%>
+    });<%-appAfterInitializeRoutes%>
 
     app.use(function(req, res, next) {
         let err = new Error('Not Found');
