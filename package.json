@@ -4,9 +4,9 @@
   "description": "",
   "homepage": "",
   "author": {
-    "name": "Grava",
+    "name": "Lautaro Alvarez",
     "email": "lautaro@grava.digital",
-    "url": "https://grava.io"
+    "url": ""
   },
   "files": [
     "generators"
