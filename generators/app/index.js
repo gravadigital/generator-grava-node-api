@@ -25,6 +25,10 @@ module.exports = class extends Generator {
       type: 'confirm',
       name: 'withUsers',
       message: 'Want users and auth?'
+    }, {
+      type: 'confirm',
+      name: 'withDefaultAdmin',
+      message: 'Want a default admin user?'
     }];
 
     return this.prompt(prompts).then((props) => {
@@ -62,9 +66,9 @@ module.exports = class extends Generator {
         {globOptions: {dot: true}}
       );
       vars.initRequires += `
-    const scheduleRunner = require('../lib/utils/schedule-runner');`;
+const scheduleRunner = require('../lib/utils/schedule-runner');`;
       vars.initPostScripts += `
-    scheduleRunner();`;
+        scheduleRunner();`;
       vars.packagejsonDependences += `,
     "node-schedule": "^1.3.2"`;
     }
@@ -104,6 +108,26 @@ const extractJwt = require('./lib/utils/extract-jwt');`;
     app.put(publicPaths.regex('put'), extractJwt);
     app.post(publicPaths.regex('post'), extractJwt);
     app.delete(publicPaths.regex('delete'), extractJwt);`;
+    }
+
+      // WITH DEFAULT ADMIN USER
+      if (this.props.withUsers) {
+        this.sourceRoot(this.sourceRoot() + '/../04-default-admin');
+        this.fs.copyTpl(
+          this.templatePath('.'),
+          this.destinationPath('.'),
+          vars,
+          {},
+          {globOptions: {dot: true}}
+        );
+        vars.envDist += `
+DEFAULTADMIN_EMAIL=
+DEFAULTADMIN_NAME=
+DEFAULTADMIN_PASSWORD=`;
+        vars.initRequires += `
+const createDefaultAdmin = require('./create-default-admin');`;
+        vars.initPostScripts += `
+        createDefaultAdmin();`;
     }
 
     // WITH HIROKI

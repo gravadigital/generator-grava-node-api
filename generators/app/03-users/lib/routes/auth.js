@@ -20,7 +20,7 @@ router.post('/login', validation, (req, res) => {
     req.body.email = req.body.email.toLowerCase();
     User.findOne({email: req.body.email})
         .then((user) => {
-            if (!user || !user.validPassword(req.body.password) || !user.isValidated) {
+            if (!user || !user.validPassword(req.body.password)) {
                 return res.status(400).json({
                     message: 'Authentication failed!',
                     code: 'authentication_failed'
