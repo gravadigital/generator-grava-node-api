@@ -13,7 +13,8 @@
   ],
   "main": "generators/index.js",
   "keywords": [
-    "",
+    "grava",
+    "hiroki",
     "yeoman-generator"
   ],
   "devDependencies": {

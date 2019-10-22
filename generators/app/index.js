@@ -28,7 +28,10 @@ module.exports = class extends Generator {
     }, {
       type: 'confirm',
       name: 'withDefaultAdmin',
-      message: 'Want a default admin user?'
+      message: 'Want a default admin user?',
+      when: (res) => {
+        return res.withUsers;
+      }
     }];
 
     return this.prompt(prompts).then((props) => {
