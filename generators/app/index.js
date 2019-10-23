@@ -131,6 +131,20 @@ const createDefaultAdmin = require('./create-default-admin');`;
 
     // WITH HIROKI
     if (this.props.withHiroki) {
+      if (this.props.withUsers) {
+        this.sourceRoot(this.sourceRoot() + '/../03-01-hiroki-with-users');
+        this.fs.copyTpl(
+          this.templatePath('.'),
+          this.destinationPath('.'),
+          vars,
+          {},
+          {globOptions: {dot: true}}
+        );
+        vars.decoratorsIndexRequires += `
+const User = require('./user');`;
+        vars.decoratorsIndexExports += `
+    User`;
+      }
       this.sourceRoot(this.sourceRoot() + '/../01-hiroki');
       this.fs.copyTpl(
         this.templatePath('.'),
@@ -144,21 +158,6 @@ const createDefaultAdmin = require('./create-default-admin');`;
     app.use(buildHiroki());`;
       vars.packagejsonDependences += `,
       "hiroki": "^0.2.6"`;
-
-      if (this.props.withUsers) {
-        this.sourceRoot(this.sourceRoot() + '/../04-default-admin');
-        this.fs.copyTpl(
-          this.templatePath('.'),
-          this.destinationPath('.'),
-          vars,
-          {},
-          {globOptions: {dot: true}}
-        );
-        vars.decoratorsIndexRequires += `
-const User = require('./user');`;
-        vars.decoratorsIndexExports += `
-    User`;
-      }
     }
 
     // BASIC STRUCTURE
