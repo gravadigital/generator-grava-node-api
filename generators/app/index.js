@@ -90,10 +90,6 @@ const scheduleRunner = require('../lib/utils/schedule-runner');`;
 const User = require('./user');`;
       vars.modelsIndexExports += `
     User`;
-      vars.decoratorsIndexRequires += `
-const User = require('./user');`;
-      vars.decoratorsIndexExports += `
-    User`;
       vars.packagejsonDependences += `,
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^8.5.1"`;
@@ -113,23 +109,23 @@ const extractJwt = require('./lib/utils/extract-jwt');`;
     app.delete(publicPaths.regex('delete'), extractJwt);`;
     }
 
-      // WITH DEFAULT ADMIN USER
-      if (this.props.withUsers) {
-        this.sourceRoot(this.sourceRoot() + '/../04-default-admin');
-        this.fs.copyTpl(
-          this.templatePath('.'),
-          this.destinationPath('.'),
-          vars,
-          {},
-          {globOptions: {dot: true}}
-        );
-        vars.envDist += `
+    // WITH DEFAULT ADMIN USER
+    if (this.props.withDefaultAdmin) {
+      this.sourceRoot(this.sourceRoot() + '/../04-default-admin');
+      this.fs.copyTpl(
+        this.templatePath('.'),
+        this.destinationPath('.'),
+        vars,
+        {},
+        {globOptions: {dot: true}}
+      );
+      vars.envDist += `
 DEFAULTADMIN_EMAIL=
 DEFAULTADMIN_NAME=
 DEFAULTADMIN_PASSWORD=`;
-        vars.initRequires += `
+      vars.initRequires += `
 const createDefaultAdmin = require('./create-default-admin');`;
-        vars.initPostScripts += `
+      vars.initPostScripts += `
         createDefaultAdmin();`;
     }
 
@@ -148,6 +144,21 @@ const createDefaultAdmin = require('./create-default-admin');`;
     app.use(buildHiroki());`;
       vars.packagejsonDependences += `,
       "hiroki": "^0.2.6"`;
+
+      if (this.props.withUsers) {
+        this.sourceRoot(this.sourceRoot() + '/../04-default-admin');
+        this.fs.copyTpl(
+          this.templatePath('.'),
+          this.destinationPath('.'),
+          vars,
+          {},
+          {globOptions: {dot: true}}
+        );
+        vars.decoratorsIndexRequires += `
+const User = require('./user');`;
+        vars.decoratorsIndexExports += `
+    User`;
+      }
     }
 
     // BASIC STRUCTURE
