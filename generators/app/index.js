@@ -32,6 +32,10 @@ module.exports = class extends Generator {
       when: (res) => {
         return res.withUsers;
       }
+    }, {
+      type: 'confirm',
+      name: 'withDocker',
+      message: 'Want Docker structure?'
     }];
 
     return this.prompt(prompts).then((props) => {
@@ -169,6 +173,28 @@ const User = require('./user');`;
       {},
       {globOptions: {dot: true}}
     );
+
+    // DOCKER STRUCTURE
+    if (this.props.withDocker) {
+      vars.dockerComposeEnv = '';
+      const env = this.fs.read(this.destinationPath('.env.dist'));
+      env.split('\n').filter((line) => {
+        return line.length > 0;
+      }).forEach((line) => {
+        if (line.split('=')[0] === 'MONGODB_HOST') {
+          line = `MONGODB_HOST=${vars.appName}-mongo`;
+        }
+        vars.dockerComposeEnv += `\n    - ${line}`;
+      });
+      this.sourceRoot(this.sourceRoot() + '/../05-docker');
+      this.fs.copyTpl(
+        this.templatePath('.'),
+        this.destinationPath('.'),
+        vars,
+        {},
+        {globOptions: {dot: true}}
+      );
+    }
   }
 
   install() {

@@ -1,0 +1,19 @@
+version: '3'
+services:
+  <%-appName%>:
+    build: .
+    container_name: <%-appName%>
+    restart: always
+    environment:<%-dockerComposeEnv%>
+    depends_on:
+      - <%-appName%>-mongo
+    networks:
+      - <%-appName%>
+  <%-appName%>-mongo:
+    image: mongo:4.0
+    restart: always
+    container_name: <%-appName%>-mongo
+    networks:
+      - <%-appName%>
+networks:
+  <%-appName%>:
