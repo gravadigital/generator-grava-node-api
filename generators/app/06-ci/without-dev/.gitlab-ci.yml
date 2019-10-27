@@ -1,0 +1,33 @@
+image: docker:latest
+
+variables:
+  PIPELINE_IMAGE: $CI_REGISTRY_IMAGE:$CI_PIPELINE_ID
+  MASTER_IMAGE: $CI_REGISTRY_IMAGE:master
+
+stages:
+    - build
+
+build:
+    stage: build
+    services:
+      - docker:dind
+    except:
+      - master
+    script:
+      - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+      - docker pull $MASTER_IMAGE || true
+      - docker build --cache-from $MASTER_IMAGE -t $PIPELINE_IMAGE .
+    tags:<%-ciRunners%>
+
+build_release:
+    stage: build
+    services:
+      - docker:dind
+    only:
+      - master
+    script:
+      - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+      - docker pull $MASTER_IMAGE || true
+      - docker build --cache-from $MASTER_IMAGE -t $MASTER_IMAGE .
+      - docker push $MASTER_IMAGE
+    tags:<%-ciRunners%>

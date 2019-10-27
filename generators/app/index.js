@@ -36,6 +36,27 @@ module.exports = class extends Generator {
       type: 'confirm',
       name: 'withDocker',
       message: 'Want Docker structure?'
+    }, {
+      type: 'confirm',
+      name: 'withCi',
+      message: 'Want a ci file for gitlab-registry?',
+      when: (res) => {
+        return res.withDocker;
+      }
+    }, {
+      type: 'confirm',
+      name: 'ciRunners',
+      message: 'CI -> runner tags: (comma separated)',
+      when: (res) => {
+        return res.ciRunnerTags;
+      }
+    }, {
+      type: 'confirm',
+      name: 'withCiDevTag',
+      message: 'CI -> With dev tag?',
+      when: (res) => {
+        return res.withCi;
+      }
     }];
 
     return this.prompt(prompts).then((props) => {
@@ -189,6 +210,28 @@ const User = require('./user');`;
       this.sourceRoot(this.sourceRoot() + '/../05-docker');
       this.fs.copyTpl(
         this.templatePath('.'),
+        this.destinationPath('.'),
+        vars,
+        {},
+        {globOptions: {dot: true}}
+      );
+    }
+
+    // CI
+    if (this.props.withCi) {
+      this.sourceRoot(this.sourceRoot() + '/../06-ci');
+      let tmpFolder = 'without-dev';
+      if (this.props.withCiDevTag) {
+        tmpFolder = 'with-dev';
+      }
+      vars.ciRunners = '';
+      if (this.props.ciRunners && this.props.ciRunners.length > 0) {
+        this.props.ciRunners.split(',').forEach((elem) => {
+          vars.ciRunners += `\n      - ${elem}`;
+        });
+      }
+      this.fs.copyTpl(
+        this.templatePath(tmpFolder),
         this.destinationPath('.'),
         vars,
         {},
