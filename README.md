@@ -13,7 +13,7 @@ npm install -g @grava.io/generator-grava-node-api
 Then generate your new project:
 
 ```bash
-yo grava-api
+yo @grava.io/grava-node-api
 ```
 
 ## Getting To Know Yeoman
