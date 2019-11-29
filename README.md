@@ -27,5 +27,5 @@ yo grava-api
 
 MIT © [Grava](https://grava.io)
 
-[npm-image]: https://badge.fury.io/js/generator-grava-api.svg
-[npm-url]: https://www.npmjs.com/package/@grava.io/generator-grava-api
+[npm-image]: https://badge.fury.io/js/grava-api-generator.svg
+[npm-url]: https://www.npmjs.com/package/@grava.io/grava-api-generator
