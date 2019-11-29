@@ -7,7 +7,7 @@ First, install [Yeoman](http://yeoman.io) and @grava.io/grava-api-generator usin
 
 ```bash
 npm install -g yo
-npm install -g grava-api-generator
+npm install -g @grava.io/grava-api-generator
 ```
 
 Then generate your new project:
@@ -27,5 +27,5 @@ yo grava-api
 
 MIT © [Grava](https://grava.io)
 
-[npm-image]: https://badge.fury.io/js/grava-api-generator.svg
+[npm-image]: https://badge.fury.io/js/%40grava.io%2Fgrava-api-generator.svg
 [npm-url]: https://www.npmjs.com/package/@grava.io/grava-api-generator
