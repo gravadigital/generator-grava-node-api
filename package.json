@@ -1,8 +1,8 @@
 {
-  "name": "@grava.io/grava-api-generator",
+  "name": "@grava.io/generator-grava-node-api",
   "version": "0.1.4",
   "description": ">",
-  "homepage": "https://github.com/gravadigital/grava-api-generator#readme",
+  "homepage": "https://github.com/gravadigital/generator-grava-node-api#readme",
   "author": "Lautaro Alvarez <lautaro@grava.digital>",
   "files": [
     "generators"
@@ -69,10 +69,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gravadigital/grava-api-generator.git"
+    "url": "git+https://github.com/gravadigital/generator-grava-node-api.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gravadigital/grava-api-generator/issues"
+    "url": "https://github.com/gravadigital/generator-grava-node-api/issues"
   }
 }
