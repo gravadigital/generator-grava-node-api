@@ -1,13 +1,13 @@
-# generator-grava-api [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> 
+# Grava Api Generator [![NPM version][npm-image]][npm-url]
+>
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-grava-api using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) and @grava.io/grava-api-generator using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
-npm install -g generator-grava-api
+npm install -g grava-api-generator
 ```
 
 Then generate your new project:
@@ -25,14 +25,7 @@ yo grava-api
 
 ## License
 
-MIT © [Lautaro Alvarez]()
-
+MIT © [Grava](https://grava.io)
 
 [npm-image]: https://badge.fury.io/js/generator-grava-api.svg
-[npm-url]: https://npmjs.org/package/generator-grava-api
-[travis-image]: https://travis-ci.com/gravadigital/generator-grava-api.svg?branch=master
-[travis-url]: https://travis-ci.com/gravadigital/generator-grava-api
-[daviddm-image]: https://david-dm.org/gravadigital/generator-grava-api.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/gravadigital/generator-grava-api
-[coveralls-image]: https://coveralls.io/repos/gravadigital/generator-grava-api/badge.svg
-[coveralls-url]: https://coveralls.io/r/gravadigital/generator-grava-api
+[npm-url]: https://www.npmjs.com/package/@grava.io/generator-grava-api

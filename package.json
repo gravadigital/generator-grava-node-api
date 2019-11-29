@@ -1,13 +1,9 @@
 {
-  "name": "generator-grava-api",
-  "version": "0.0.0",
-  "description": "",
-  "homepage": "",
-  "author": {
-    "name": "Lautaro Alvarez",
-    "email": "lautaro@grava.digital",
-    "url": ""
-  },
+  "name": "@grava.io/grava-api-generator",
+  "version": "0.1.0",
+  "description": ">",
+  "homepage": "https://github.com/gravadigital/grava-api-generator#readme",
+  "author": "Lautaro Alvarez <lautaro@grava.digital>",
   "files": [
     "generators"
   ],
@@ -71,6 +67,12 @@
     "pretest": "eslint .",
     "test": "jest"
   },
-  "repository": "gravadigital/generator-grava-api",
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gravadigital/grava-api-generator.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gravadigital/grava-api-generator/issues"
+  }
 }
