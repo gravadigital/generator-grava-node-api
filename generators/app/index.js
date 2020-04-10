@@ -182,7 +182,7 @@ const User = require('./user');`;
     const buildHiroki = require('./build-hiroki');
     app.use(buildHiroki());`;
       vars.packagejsonDependences += `,
-      "hiroki": "^0.2.6"`;
+      "hiroki": "^0.2.9"`;
     }
 
     // BASIC STRUCTURE
@@ -193,6 +193,10 @@ const User = require('./user');`;
       vars,
       {},
       {globOptions: {dot: true}}
+    );
+    this.fs.copy(
+      this.templatePath('.gitignore'),
+      this.destinationPath('.gitignore')
     );
 
     // DOCKER STRUCTURE
@@ -205,7 +209,7 @@ const User = require('./user');`;
         if (line.split('=')[0] === 'MONGODB_HOST') {
           line = `MONGODB_HOST=${vars.appName}-mongo`;
         }
-        vars.dockerComposeEnv += `\n    - ${line}`;
+        vars.dockerComposeEnv += `\n      - ${line}`;
       });
       this.sourceRoot(this.sourceRoot() + '/../05-docker');
       this.fs.copyTpl(
