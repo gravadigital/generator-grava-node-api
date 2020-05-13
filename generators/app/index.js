@@ -195,7 +195,7 @@ const User = require('./user');`;
       {globOptions: {dot: true}}
     );
     this.fs.copy(
-      this.templatePath('.gitignore'),
+      this.templatePath('../_gitignore'),
       this.destinationPath('.gitignore')
     );
 
