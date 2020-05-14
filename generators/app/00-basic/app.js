@@ -1,10 +1,10 @@
 'use strict';
 const express = require('express');
 const path = require('path');
-const logger = require('./lib/logger');
+const logger = require('@lib/logger');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const routes = require('./lib/routes');
+const routes = require('@lib/routes');
 const expressWinston = require('express-winston');
 const app = express();
 const cors = require('cors');<%-appRequires%>

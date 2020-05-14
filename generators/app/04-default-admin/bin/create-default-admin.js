@@ -1,6 +1,6 @@
 'use strict';
-const logger = require('../lib/logger');
-const {User} = require('../lib/models');
+const logger = require('@lib/logger');
+const {User} = require('@lib/models');
 
 function createDefaultAdmin() {
     let email = process.env.DEFAULTADMIN_EMAIL;

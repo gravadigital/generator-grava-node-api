@@ -94,7 +94,7 @@ module.exports = class extends Generator {
         {globOptions: {dot: true}}
       );
       vars.initRequires += `
-const scheduleRunner = require('../lib/utils/schedule-runner');`;
+const scheduleRunner = require('@lib/utils/schedule-runner');`;
       vars.initPostScripts += `
         scheduleRunner();`;
       vars.packagejsonDependences += `,
@@ -119,14 +119,15 @@ const User = require('./user');`;
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^8.5.1"`;
       vars.envDist += `
-JWT_SECRET=`;
+JWT_SECRET=
+JWT_ISSUER=`;
       vars.routesIndexRequires += `
 const Auth = require('./auth')`;
       vars.routesIndexExports += `
     Auth`;
       vars.appRequires += `
 const publicPaths = require('./config/public-paths');
-const extractJwt = require('./lib/utils/extract-jwt');`;
+const extractJwt = require('@lib/utils/extract-jwt');`;
       vars.appAfterInitializePrevRoutes += `
     app.get(publicPaths.regex('get'), extractJwt);
     app.put(publicPaths.regex('put'), extractJwt);

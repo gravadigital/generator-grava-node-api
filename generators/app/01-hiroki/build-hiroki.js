@@ -1,7 +1,7 @@
 'use strict';
 const hiroki = require('hiroki');
-const models = require('./lib/models');
-const decorators = require('./lib/decorators');
+const models = require('@lib/models');
+const decorators = require('@lib/decorators');
 
 function buildHiroki() {
     Object.keys(models).forEach((key) => {

@@ -1,10 +1,11 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-const {User} = require('../models');
-const logger = require('../logger');
+const {User} = require('@lib/models');
+const logger = require('@lib/logger');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_ISSUER = process.env.JWT_ISSUER;
 
 function validation(req, res, next) {
     if (!req.body.email || !req.body.password) {
@@ -29,7 +30,10 @@ router.post('/login', validation, (req, res) => {
             const token = jwt.sign(
                 user.toToken(),
                 JWT_SECRET,
-                {expiresIn: '1d'}
+                {
+                    expiresIn: '1d',
+                    issuer: JWT_ISSUER
+                }
             );
             return res.status(200).json({token});
         })
