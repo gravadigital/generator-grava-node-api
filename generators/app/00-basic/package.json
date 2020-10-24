@@ -12,13 +12,13 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-winston": "^4.0.5",
-    "helmet": "^4.1.0",
+    "helmet": "^4.1.1",
     "module-alias": "^2.2.2",
-    "mongoose": "^5.10.0",
+    "mongoose": "^5.10.10",
     "winston": "^3.3.3"<%-packagejsonDependences%>
   },
   "devDependencies": {
-    "eslint": "7.0.0",
+    "eslint": "7.12.0",
     "eslint-formatter-checkstyle-relative-paths": "^1.0.1",
     "eslint-plugin-security": "^1.4.0"
   },

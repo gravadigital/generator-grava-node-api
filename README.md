@@ -23,6 +23,20 @@ yo @grava.io/grava-node-api
  * Yeoman can be too opinionated at times but is easily convinced not to be.
  * Feel free to [learn more about Yeoman](http://yeoman.io/).
 
+## Development
+1. Fork
+2. Clone locally
+3. Modify code
+4. Test locally
+- Install from folder:
+```
+npm link
+```
+- Generate test project:
+```
+yo @grava.io/grava-node-api
+```
+
 ## License
 
 MIT © [Grava](https://grava.io)

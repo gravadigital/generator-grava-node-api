@@ -62,29 +62,4 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-logger._info = logger.info;
-logger._debug = logger.debug;
-logger._error = logger.error;
-
-logger.info = function(data1, data2) {
-    if (data2) {
-        data1 += ` ${JSON.stringify(data2, null, 2)}`;
-    }
-    return logger._info(data1);
-};
-
-logger.debug = function(data1, data2) {
-    if (data2) {
-        data1 += ` ${JSON.stringify(data2, null, 2)}`;
-    }
-    return logger._debug(data1);
-};
-
-logger.error = function(data1, data2) {
-    if (data2) {
-        data1 += ` ${JSON.stringify(data2, null, 2)}`;
-    }
-    return logger._error(data1);
-};
-
 module.exports = logger;
