@@ -2,7 +2,7 @@
 require('dotenv').config();
 require('module-alias/register');
 const app = require('../app');
-const logger = require('@lib/logger');<%-initRequires%>
+const logger = require('@logger');<%-initRequires%>
 
 return app.connectMongoose()
     .then(() => {

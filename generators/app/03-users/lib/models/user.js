@@ -34,7 +34,7 @@ userSchema.methods.validPassword = function(password) {
 
 userSchema.methods.toToken = function() {
     return {
-        _id: this._id,
+        sub: this._id,
         fullName: this.fullName,
         email: this.email,
         role: this.role
