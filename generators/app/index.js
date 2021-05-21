@@ -57,8 +57,11 @@ module.exports = class extends Generator {
       when: (res) => {
         return res.withCi;
       }
+    }, {
+      type: 'confirm',
+      name: 'withTests',
+      message: 'Want tests structure?'
     }];
-
     return this.prompt(prompts).then((props) => {
       this.props = props;
     });
@@ -72,7 +75,10 @@ module.exports = class extends Generator {
       appAfterInitializeRoutes: '',
       appRequires: '',
       envDist: '',
+      envTest: '',
       packagejsonDependences: '',
+      packagejsonDevDependences: '',
+      packagejsonScripts: '',
       initRequires: '',
       initPostScripts: '',
       modelsIndexRequires: '',
@@ -98,7 +104,7 @@ const scheduleRunner = require('@lib/utils/schedule-runner');`;
       vars.initPostScripts += `
         scheduleRunner();`;
       vars.packagejsonDependences += `,
-    "node-schedule": "^1.3.2"`;
+    "node-schedule": "^2.0.0"`;
     }
 
     // WITH USER STRUCTURE
@@ -117,7 +123,7 @@ const User = require('./user');`;
     User`;
       vars.packagejsonDependences += `,
     "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^8.5.1"`;
+  "jsonwebtoken": "^8.5.1"`;
       vars.envDist += `
 JWT_SECRET=
 JWT_ISSUER=`;
@@ -183,7 +189,41 @@ const User = require('./user');`;
     const buildHiroki = require('./build-hiroki');
     app.use(buildHiroki());`;
       vars.packagejsonDependences += `,
-      "hiroki": "^0.2.9"`;
+    "hiroki": "^0.2.9"`;
+    }
+
+    // WITH TESTS STRUCTURE
+    if (this.props.withTests) {
+      vars.envTest += `
+JWT_ISSUER=test
+JWT_SECRET=test`;
+      this.sourceRoot(this.sourceRoot() + '/../07-tests');
+      this.fs.copyTpl(
+        this.templatePath('./structure/'),
+        this.destinationPath('.'),
+        vars,
+        {},
+        {globOptions: {dot: true}}
+      );
+      if (this.props.withUsers) {
+        console.log('Withusers: ', this.props.withUsers);
+        this.sourceRoot(this.sourceRoot() + '/../07-tests');
+        this.fs.copyTpl(
+          this.templatePath('./tests-files/'),
+          this.destinationPath('./tests/'),
+          vars,
+          {},
+          {globOptions: {dot: true}}
+        );
+      }
+      vars.packagejsonScripts += `,
+      "test-mocha": "mocha tests/**/*"`;
+      vars.packagejsonDependences += `,
+      "node-schedule": "^1.3.2"`;
+      vars.packagejsonDevDependences += `,
+    "mocha": "^8.4.0",
+    "supertest": "^6.1.3",
+    "should": "^13.2.3"`;
     }
 
     // BASIC STRUCTURE

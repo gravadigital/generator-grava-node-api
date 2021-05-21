@@ -3,27 +3,32 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/init.js"
+    "start": "node ./bin/init.js"<%-packagejsonScripts%>
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
-    "express-winston": "^4.0.5",
-    "helmet": "^4.1.1",
+    "express-winston": "^4.1.0",
+    "helmet": "^4.6.0",
     "module-alias": "^2.2.2",
-    "mongoose": "^5.10.10",
+    "mongoose": "^5.12.9",
     "winston": "^3.3.3"<%-packagejsonDependences%>
   },
   "devDependencies": {
-    "eslint": "7.12.0",
+    "eslint": "7.26.0",
     "eslint-formatter-checkstyle-relative-paths": "^1.0.1",
-    "eslint-plugin-security": "^1.4.0"
+    "eslint-plugin-security": "^1.4.0"<%-packagejsonDevDependences%>
   },
   "_moduleAliases": {
     "@root": ".",
-    "@lib": "./lib/"
+    "@lib": "./lib/",
+    "@logger": "./lib/logger.js",
+    "@utils": "./lib/utils/",
+    "@middlewares": "./lib/utils/middlewares/",
+    "@decorators-utils": "./lib/utils/decorators/",
+    "@models": "./lib/models/"
   }
 }
