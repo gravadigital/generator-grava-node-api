@@ -20,7 +20,7 @@ function connectMongoose() {
                 return resolve();
             })
             .catch((error) => {
-                logger.error('Mongoose connection: ', error.message);
+                logger.error(`Mongoose connection: ${error.message}`);
                 return reject();
             });
     });
