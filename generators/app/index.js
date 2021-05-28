@@ -206,7 +206,6 @@ JWT_SECRET=test`;
         {globOptions: {dot: true}}
       );
       if (this.props.withUsers) {
-        console.log('Withusers: ', this.props.withUsers);
         this.sourceRoot(this.sourceRoot() + '/../07-tests');
         this.fs.copyTpl(
           this.templatePath('./tests-files/'),
@@ -283,10 +282,5 @@ JWT_SECRET=test`;
         {globOptions: {dot: true}}
       );
     }
-  }
-
-  install() {
-    this.log('Installing dependencies');
-    this.npmInstall();
   }
 };
