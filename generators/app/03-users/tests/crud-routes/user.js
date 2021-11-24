@@ -10,7 +10,7 @@ describe('User', function() {
         return app.start()
             .then((dataApp) => {
                 application = dataApp;
-                return User.remove({});
+                return User.deleteMany({});
             })
             .then(() => {
                 return Promise.all([
@@ -26,7 +26,7 @@ describe('User', function() {
     });
 
     after(() => {
-        return User.remove({})
+        return User.deleteMany({})
             .then(() => {
                 return app.finish();
             });

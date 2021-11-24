@@ -16,7 +16,7 @@ describe('LOGIN', () => {
         return app.start()
             .then((dataApp) => {
                 application = dataApp;
-                return User.remove({});
+                return User.deleteMany({});
             })
             .then(() => {
                 return Promise.all([
@@ -32,13 +32,13 @@ describe('LOGIN', () => {
     });
 
     after(() => {
-        return User.remove({})
+        return User.deleteMany({})
             .then(() => {
                 return app.finish();
             });
     });
 
-    it('/login - Should return body is empty', function() {
+    it('/auth/login - Should return body is empty', function() {
         return request(application)
             .post('/api/auth/login')
             .set('Accept', 'application/json')
@@ -49,7 +49,7 @@ describe('LOGIN', () => {
             });
     });
 
-    it('/login - Should return user not found', function() {
+    it('/auth/login - Should return user not found', function() {
         return request(application)
             .post('/api/auth/login')
             .set('Accept', 'application/json')
@@ -64,7 +64,7 @@ describe('LOGIN', () => {
             });
     });
 
-    it('/login - Should return authentication failed', function() {
+    it('/auth/login - Should return authentication failed', function() {
         return request(application)
             .post('/api/auth/login')
             .set('Accept', 'application/json')
@@ -79,7 +79,7 @@ describe('LOGIN', () => {
             });
     });
 
-    it('/login - Should return user token valid', function() {
+    it('/auth/login - Should return user token valid', function() {
         return request(application)
             .post('/api/auth/login')
             .set('Accept', 'application/json')

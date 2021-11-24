@@ -17,7 +17,7 @@ function validation(req, res, next) {
     return next();
 }
 
-router.post('/login', validation, (req, res) => {
+router.post('/auth/login', validation, (req, res) => {
     req.body.email = req.body.email.toLowerCase();
     User.findOne({email: req.body.email})
         .then((user) => {

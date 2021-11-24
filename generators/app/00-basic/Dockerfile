@@ -1,6 +1,6 @@
-FROM node:10.16.3-alpine
+FROM node:14.18-alpine
 
-RUN apk add --update git openssh fontconfig curl curl-dev && rm -rf /tmp/* /var/cache/apk/*
+RUN apk add --update git && rm -rf /tmp/* /var/cache/apk/*
 RUN npm config set registry http://registry.npmjs.org && npm cache clean --force
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app

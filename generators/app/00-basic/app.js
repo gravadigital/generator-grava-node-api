@@ -30,7 +30,7 @@ function initialize() {
     app.use(express.static(path.join(__dirname, 'public')));
 <%-appAfterInitializePrevRoutes%>
     Object.keys(routes).forEach((key) => {
-        app.use(`/api/${key}`, routes[key]);
+        app.use('/api', routes[key]);
     });<%-appAfterInitializeRoutes%>
 
     app.use(function(req, res, next) {

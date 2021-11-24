@@ -12,7 +12,7 @@ function connectMongoose() {
     return new Promise((resolve, reject) => {
         mongoose.Promise = Promise;
         mongoose.connect(
-            `mongodb://${process.env.MONGODB_HOST}:${process.env.MONGODB_PORT}/${process.env.MONGODB_DB}-tests`,
+            `mongodb://${process.env.MONGODB_HOST}:${process.env.MONGODB_PORT}/${process.env.MONGODB_DB}`,
             {useNewUrlParser: true}
         )
             .then(() => {
