@@ -1,9 +1,9 @@
 'use strict';
-const Generator = require('yeoman-generator');
-const chalk = require('chalk');
-const yosay = require('yosay');
+import Generator from 'yeoman-generator';
+import chalk from 'chalk';
+import yosay from 'yosay';
 
-module.exports = class extends Generator {
+export default class GeneratorGrava extends Generator {
   prompting() {
     this.log(
       yosay(`Welcome to the terrific ${chalk.red('generator-grava-api')} generator!`)
