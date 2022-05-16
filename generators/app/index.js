@@ -75,7 +75,7 @@ const scheduleRunner = require('@lib/utils/schedule-runner');`;
       vars.initPostScripts += `
         scheduleRunner();`;
       vars.packagejsonDependences += `,
-    "node-schedule": "^2.0.0"`;
+    "node-schedule": "^2.1.0"`;
     }
 
     // WITH USER STRUCTURE
