@@ -1,9 +1,9 @@
 'use strict';
-const Generator = require('yeoman-generator');
-const chalk = require('chalk');
-const yosay = require('yosay');
+import Generator from 'yeoman-generator';
+import chalk from 'chalk';
+import yosay from 'yosay';
 
-module.exports = class extends Generator {
+export default class GeneratorGrava extends Generator {
   prompting() {
     this.log(
       yosay(`Welcome to the terrific ${chalk.red('generator-grava-api')} generator!`)
@@ -75,7 +75,7 @@ const scheduleRunner = require('@lib/utils/schedule-runner');`;
       vars.initPostScripts += `
         scheduleRunner();`;
       vars.packagejsonDependences += `,
-    "node-schedule": "^2.0.0"`;
+    "node-schedule": "^2.1.0"`;
     }
 
     // WITH USER STRUCTURE
